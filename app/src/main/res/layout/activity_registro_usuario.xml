@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a55.lab5_tp_android_buffet.Activities.RegistroUsuario.RegistroUsuarioActivity"
+    android:background="#DCDCDC">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content">
+
+        <!--Titulo-->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:name="tvTituloRegistro"
+            android:text="@string/tvTituloRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+
+            android:textAlignment="center" />
+
+        <!--SubTitulo-->
+        <TextView
+            android:id="@+id/tvSubTitulo"
+            android:name="tvSubTituloRegistro"
+            android:text="@string/tvSubTituloRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:textAlignment="center" />
+
+        <!--*** INPUTS ***-->
+
+        <!--Nombre-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvNombre-->
+            <TextView
+                android:id="@+id/tvNombre"
+                android:name="tvNombre"
+                android:text="@string/tvNombre"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etNombre-->
+            <EditText
+                android:id="@+id/etNombre"
+                android:name="etNombre"
+                android:hint="@string/etNombre"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+        <!--Apellido-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvApellido-->
+            <TextView
+                android:id="@+id/tvApellido"
+                android:name="tvApellido"
+                android:text="@string/tvApellido"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etApellido-->
+            <EditText
+                android:id="@+id/etApellido"
+                android:name="etApellido"
+                android:hint="@string/etApellido"
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+        <!--DNI-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvDni-->
+            <TextView
+                android:id="@+id/tvDni"
+                android:name="etDNI"
+                android:text="@string/tvDNI"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etDni-->
+            <EditText
+                android:id="@+id/etDni"
+                android:name="etDNI"
+                android:hint="@string/etDNI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:inputType="number"
+                android:maxLength="8"/>
+            <!-- android:minLength="7" -->
+
+        </LinearLayout>
+
+        <!--Email-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvEmail-->
+            <TextView
+                android:id="@+id/tvEmail"
+                android:name="tvEmail"
+                android:text="@string/tvEmail"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etEmail-->
+            <EditText
+                android:id="@+id/etEmail"
+                android:name="etEmail"
+                android:hint="@string/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:inputType="textEmailAddress"/>
+
+        </LinearLayout>
+
+        <!--Clave1-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvClave1-->
+            <TextView
+                android:id="@+id/tvClave1"
+                android:name="tvClave"
+                android:text="@string/tvClave"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etClave1-->
+            <EditText
+                android:id="@+id/etClave1"
+                android:name="tvClave"
+                android:hint="@string/etClave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:inputType="textPassword" />
+
+        </LinearLayout>
+
+        <!--Clave2-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvClave2-->
+            <TextView
+                android:id="@+id/tvClave2"
+                android:name="tvReingreseClave"
+                android:text="@string/tvReingreseClave"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etClave2-->
+            <EditText
+                android:id="@+id/etClave2"
+                android:name="etReingreseClave"
+                android:hint="@string/etReingreseClave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:inputType="textPassword"/>
+
+        </LinearLayout>
+
+        <!--*** BOTONES ***-->
+
+        <!--Registrarme-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--btnRegistrarme-->
+            <Button
+                android:id="@+id/btnRegistrarme"
+                android:name="btnRegistrarme"
+                android:text="@string/btnRegistrarme"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#fff"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
+

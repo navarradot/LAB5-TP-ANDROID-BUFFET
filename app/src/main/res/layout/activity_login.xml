@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a55.lab5_tp_android_buffet.Activities.Login.LoginActivity"
+    android:background="#DCDCDC">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content" >
+
+        <!--Titulo-->
+        <TextView
+            android:id="@+id/tvTituloLogin"
+            android:name="tvTitulo"
+            android:text="@string/tvTituloLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+            android:textAlignment="center" />
+
+        <!--SubTitulo-->
+        <TextView
+            android:id="@+id/tvSubTitulo"
+            android:name="tvSubTituloLogin"
+            android:text="@string/tvSubTituloLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:textAlignment="center" />
+
+        <!--Imagen-->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/utnfra"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <!--Email-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvEmail-->
+            <TextView
+                android:id="@+id/tvEmail"
+                android:name="tvEmail"
+                android:text="@string/tvEmail"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etEmail-->
+            <EditText
+                android:id="@+id/etEmail"
+                android:name="etEmail"
+                android:hint="@string/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:inputType="textEmailAddress"/>
+
+        </LinearLayout>
+
+        <!--Clave-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!--tvClave-->
+            <TextView
+                android:id="@+id/tvClave"
+                android:name="tvClave"
+                android:text="@string/tvClave"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+            <!--etClave-->
+            <EditText
+                android:id="@+id/etClave"
+                android:name="etClave"
+                android:hint="@string/etClave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:inputType="textPassword" />
+
+        </LinearLayout>
+
+        <!--Botones-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <!-- chkRecordar-->
+            <CheckBox
+                android:id="@+id/chkRecordarme"
+                android:name="chkRecordarme"
+                android:text="@string/chkRecordarme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--btnIngresar-->
+            <Button
+                android:id="@+id/btnIngresar"
+                android:name="btnIngresar"
+                android:text="@string/btnIngresar"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:backgroundTintMode="add"
+                android:textColor="#fff"
+                android:textSize="12dp"/>
+
+            <!--btnRegistrarme-->
+            <Button
+                android:id="@+id/btnRegistrarme"
+                android:name="btnRegistrarme"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="5dp"
+                android:text="@string/btnRegistrarme"
+                android:textColor="#fff"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

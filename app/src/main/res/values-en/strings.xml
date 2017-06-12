@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">LAB5-TP-ANDROID-BUFFET</string>
+
+    <!-- Toast -->
+    <string name="pedidoEnviado">Su pedido fue enviado con éxito!</string>
+    <string name="pedidoVacio">NO SE PUEDE ENVIAR UN PEDIDO VACIO :(</string>
+
+    <!-- Validaciones-->
+    <string name="campoVacio">Empty field!</string>
+    <string name="emailInvalido">Invalid email!</string>
+    <string name="dniInvalido">Invalid DNI!</string>
+    <string name="emailClaveIncorrecto">Invalid email or password!</string>
+    <string name="usuarioExiste">Error: Alredy exist an user with this email or DNI</string>
+    <string name="clavesDistintas">Error: The passwords dont equals</string>
+
+    <!-- LOGIN LAYOUT: EN-->
+    <string name="tvTituloLogin">Login</string>
+    <string name="tvSubTituloLogin">Welcome to my first aplication\n Buffet-UTN</string>
+    <string name="tvEmail">Email:</string>
+    <string name="etEmail">Enter your email</string>
+    <string name="tvClave">Password:</string>
+    <string name="etClave">Enter your password</string>
+    <string name="chkRecordarme">Remember credentials</string>
+    <string name="btnIngresar">LOG IN</string>
+    <string name="btnRegistrarme">SIGN UP</string>
+
+    <!-- REGISTRO LAYOUT ES: -->
+    <string name="tvTituloRegistro">Sign Up</string>
+    <string name="tvSubTituloRegistro">This is the Sign Up screen.\n Please enter true values.</string>
+    <string name="tvNombre">Name:</string>
+    <string name="etNombre">Enter your name</string>
+    <string name="tvApellido">Surname:</string>
+    <string name="etApellido">Enter your surname</string>
+    <string name="tvDNI">DNI:</string>
+    <string name="etDNI">Enter your DNI</string>
+    <string name="tvReingreseClave">Re-enter:</string>
+    <string name="etReingreseClave">Re-enter your password</string>
+
+    <!-- MENU LAYOUT ES: -->
+    <string name="tvImporteTotalTexto">TOTAL PRICE: $</string>
+    <string name="tvCantidadElementosTexto">Selected items: </string>
+    <string name="btnVerPedido">send order</string>
+
+    <!-- Item_Producto-->
+    <string name="tvPrecioProductoTexto">Price: $</string>
+
+    <!-- MI PEDIDO LAYOUT ES: -->
+    <string name="btnConfirmarPedido">confirm</string>
+
+
+    <!-- MENU SUPERIOR -->
+    <string name="btnMenuDesloguearse">Logout</string>
+    <string name="btnVerPedidoActual">View order</string>
+
+
+    <!-- MI PEDIDO SUPERIOR -->
+    <string name="btnConfirmarPedidoActual">Confirm this order</string>
+    <string name="btnLimpiarPedido">Clear order</string>
+
+</resources>

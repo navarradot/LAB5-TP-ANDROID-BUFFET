@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6495ED</color>
+    <color name="colorPrimaryDark">#ff99cc00</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--MiEstilo-->
+    <!--<color name="colorAzul">#6495ED</color>
+    <color name="colorVerde">#ff99cc00</color>
+    <color name="colorGris">#DCDCDC</color>-->
+
+</resources>

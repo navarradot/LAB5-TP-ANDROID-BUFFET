@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    android:id="@+id/miMenu"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <!--app:showAsAction="never" (no lo muestra nunca a la izquierda)-->
+        <item
+            android:id="@+id/btnVerPedidoActual"
+            android:title="@string/btnVerPedidoActual"
+            />
+
+        <item
+            android:id="@+id/btnMenuDesloguearse"
+            android:title="@string/btnMenuDesloguearse"
+            />
+
+
+
+
+</menu>
