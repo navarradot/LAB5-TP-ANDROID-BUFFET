@@ -27,7 +27,6 @@ public class MenuCtrl implements IMenu{
     /**
      * Atributos
      */
-
     public MenuView menuView;
     public MenuListener menuListener;
 
@@ -101,5 +100,4 @@ public class MenuCtrl implements IMenu{
 
         editor.commit();
     }
-
 }
