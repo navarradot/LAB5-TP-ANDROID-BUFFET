@@ -2,7 +2,7 @@
     <string name="app_name">LAB5-TP-ANDROID-BUFFET</string>
 
     <!-- Toast -->
-    <string name="registroUsuarioOk">Usuario Registrado! Ya puede acceder con sus credenciales.</string>
+    <string name="registroUsuarioOk">Registered user ok!. You can now sign in with your credentials</string>
     <string name="registroUsuarioError">ERROR: Already exists a user with that email or dni.</string>
     <string name="pedidoEnviado">Your order was sent successfully!</string>
     <string name="pedidoVacio">YOU CAN NOT SUBMIT AN EMPTY ORDER :(</string>

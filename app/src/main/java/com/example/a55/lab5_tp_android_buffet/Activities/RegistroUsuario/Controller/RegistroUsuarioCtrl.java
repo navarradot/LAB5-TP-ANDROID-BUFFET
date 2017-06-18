@@ -135,15 +135,22 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
     public void registrar(Usuario usuario) {
 
         // CODIGO: 102
-        Uri.Builder params = new Uri.Builder();
+        try {
 
-        String strBody = "{nombre:"+ "'"+usuario.nombre+"',"+"apellido:"+"'"+usuario.apellido+"',"+"dni:"+usuario.dni+","+"mail:"+"'"+usuario.mail+"',"+"clave:"+"'"+usuario.clave+"'"+"}";
-        Log.d("MI BODY: ", strBody);
-        //JSONObject jsonBody = new JSONObject(strBody.substring(strBody.indexOf("{"), strBody.lastIndexOf("}") + 1));
-        params.appendQueryParameter("body",strBody);
+            String stringJsonPost = "{"+
+                "\"nombre\":"   + "\"" + usuario.nombre   + "\"," +
+                "\"apellido\":" + "\"" + usuario.apellido + "\"," +
+                "\"dni\":"             + usuario.dni      + "," +
+                "\"mail\":"     + "\"" + usuario.mail     + "\"," +
+                "\"clave\":"    + "\"" + usuario.clave    + "\""  + "}";
 
-        Thread threadRegistrarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/nuevo", params, "postString", 102));
-        threadRegistrarUsuario.start();
+
+            Thread threadRegistrarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/nuevo", stringJsonPost, "postString", 102));
+            threadRegistrarUsuario.start();
+        } catch (Exception e) {
+            Log.d("ERROR: ", e.getMessage());
+        }
+
 
     }
 
@@ -151,42 +158,43 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
 
     @Override
     public boolean handleMessage(Message msg) {
-        // validarUsuarioNoExista
-        if (msg.arg1 == 2 && msg.arg2 == 101)
-        {
 
-            Boolean rtaValidarUsuarioNoExista =  JsonParser.getValidacionUsuarioNoExista((String)msg.obj);
+        try {
+            // validarUsuarioNoExista
+            if (msg.arg1 == 2 && msg.arg2 == 101) {
 
-            if (rtaValidarUsuarioNoExista) {
+                Boolean rtaValidarUsuarioNoExista = JsonParser.getValidacionUsuarioNoExista((String) msg.obj);
 
-                //this.registrar(this.usuarioARegistrar);
-                Log.d("NO EXISTE :)", ""+rtaValidarUsuarioNoExista);
+                if (rtaValidarUsuarioNoExista) {
+
+                    this.registrar(this.usuarioARegistrar);
+                    //Log.d("NO EXISTE :)", ""+rtaValidarUsuarioNoExista);
+                } else {
+                    Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioError), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
             }
-            else {
-                Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioError), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+            // registrarUsuario
+            if (msg.arg1 == 3 && msg.arg2 == 102) {
+                String mensaje = (String) msg.obj;
+
+                if (mensaje.equals("Se inserto correctamente")) {
+
+                    Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioOk), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    this.registroUsuarioView.registroUsuarioActivity.finish();
+                } else {
+                    Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioError), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
             }
-
-        }
-        // registrarUsuario
-        if (msg.arg1 == 2 && msg.arg2 == 102)
-        {
-
-
-            if (msg.obj.equals("Se inserto correctamente")) {
-
-                Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioOk), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                this.registroUsuarioView.registroUsuarioActivity.finish();
-            }
-            else {
-                Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioError), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            }
-
+        } catch(Exception e) {
+            Log.d("ERROR CATCH", e.getMessage());
         }
 
         return true;

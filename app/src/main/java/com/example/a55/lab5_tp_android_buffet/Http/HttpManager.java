@@ -74,6 +74,34 @@ public class HttpManager {
             throw new IOException();
     }
 
+    public String getStrDataByPOST(String stringJsonPost) throws IOException {
+
+        byte[] bytes = getBytesDataByPOST(stringJsonPost);
+        return new String(bytes, "UTF-8");
+    }
+
+    public byte[] getBytesDataByPOST(String stringJsonPost) throws IOException {
+
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.connect();
+
+        OutputStream os = conn.getOutputStream();
+        os.write(stringJsonPost.getBytes());
+        os.flush();
+
+        int response = conn.getResponseCode();
+
+        if(response==200) {
+            InputStream is = conn.getInputStream();
+            return readFully(is);
+        }
+        else
+            throw new IOException();
+    }
+
     private byte[] readFully(InputStream inputStream) throws IOException {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -85,31 +113,5 @@ public class HttpManager {
         }
         inputStream.close();
         return baos.toByteArray();
-    }
-
-    public byte[] getBytesDataByPOST(Uri.Builder postParams) throws IOException {
-        Log.d("Error de post", "rta: " + postParams.toString());
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
-
-
-        String query = postParams.build().getEncodedQuery();
-        OutputStream os = conn.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
-
-        writer.write(query);
-        writer.flush();
-        writer.close();
-        os.close();
-        int response = conn.getResponseCode();
-
-        Log.d("Error de post", "rta: " + response);
-
-        if(response==200) {
-            InputStream is = conn.getInputStream();
-            return readFully(is);
-        }
-        else
-            throw new IOException();
     }
 }

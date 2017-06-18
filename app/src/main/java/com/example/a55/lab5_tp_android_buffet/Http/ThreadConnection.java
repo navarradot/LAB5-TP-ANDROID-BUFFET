@@ -22,7 +22,7 @@ public class ThreadConnection implements Runnable {
     private String tipo;
     private Integer origen;
     private String strUrl;
-    private Uri.Builder postParams;
+    private String stringJsonPost;
 
 
     public ThreadConnection (Handler handler, String strUrl, String tipo, Integer origen)
@@ -33,13 +33,13 @@ public class ThreadConnection implements Runnable {
         this.strUrl     = strUrl;
     }
 
-    public ThreadConnection (Handler handler, String strUrl, Uri.Builder postParams, String tipo, Integer origen)
+    public ThreadConnection (Handler handler, String strUrl, String stringJsonPost, String tipo, Integer origen)
     {
         this.handler    = handler;
         this.tipo       = tipo;
         this.origen     = origen;
         this.strUrl     = strUrl;
-        this.postParams = postParams;
+        this.stringJsonPost   = stringJsonPost;
     }
 
 
@@ -71,7 +71,7 @@ public class ThreadConnection implements Runnable {
                 {
                     message.arg1 = 3;
                     message.arg2 = this.origen;
-                    message.obj = httpManager.getBytesDataByPOST(this.postParams);
+                    message.obj = httpManager.getStrDataByPOST(this.stringJsonPost);
                 }
             }
 
