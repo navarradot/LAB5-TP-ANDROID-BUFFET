@@ -2,8 +2,11 @@
     <string name="app_name">LAB5-TP-ANDROID-BUFFET</string>
 
     <!-- Toast -->
-    <string name="pedidoEnviado">Su pedido fue enviado con éxito!</string>
-    <string name="pedidoVacio">NO SE PUEDE ENVIAR UN PEDIDO VACIO :(</string>
+    <string name="registroUsuarioOk">Usuario Registrado! Ya puede acceder con sus credenciales.</string>
+    <string name="registroUsuarioError">ERROR: Already exists a user with that email or dni.</string>
+    <string name="pedidoEnviado">Your order was sent successfully!</string>
+    <string name="pedidoVacio">YOU CAN NOT SUBMIT AN EMPTY ORDER :(</string>
+    <string name="problemaConexion">Problem connecting to the server. Try again.</string>
 
     <!-- Validaciones-->
     <string name="campoVacio">Empty field!</string>

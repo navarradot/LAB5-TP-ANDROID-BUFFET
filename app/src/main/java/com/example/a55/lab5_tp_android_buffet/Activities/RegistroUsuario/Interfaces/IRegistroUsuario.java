@@ -11,5 +11,6 @@ import com.example.a55.lab5_tp_android_buffet.POJOS.Usuario;
 public interface IRegistroUsuario {
 
     public void operar(View v);
+    public void validarUsuarioNoExista(Usuario usuario);
     public void registrar(Usuario usuario);
 }

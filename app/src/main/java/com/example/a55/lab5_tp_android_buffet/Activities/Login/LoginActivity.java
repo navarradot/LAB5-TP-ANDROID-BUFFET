@@ -2,9 +2,14 @@ package com.example.a55.lab5_tp_android_buffet.Activities.Login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.example.a55.lab5_tp_android_buffet.Activities.Login.Controller.LoginCtrl;
 import com.example.a55.lab5_tp_android_buffet.Activities.Login.Model.LoginModel;
@@ -19,6 +24,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private List<Usuario> usuarios;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +35,12 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Usuarios
+        /*
         Usuario.listaUsuarios = new ArrayList<Usuario>();
 
         Usuario u1 = new Usuario("Juan", "Torrellas", 20555444, "a@a.com", "123");
         Usuario.registrarUsuario(u1);
+        */
 
         // Productos
         Producto.listaProductos = new ArrayList<Producto>();
@@ -61,6 +70,6 @@ public class LoginActivity extends AppCompatActivity {
         LoginView loginView = new LoginView(this, loginModel);
         LoginCtrl loginCtrl = new LoginCtrl(loginView);
 
-
     }
+
 }

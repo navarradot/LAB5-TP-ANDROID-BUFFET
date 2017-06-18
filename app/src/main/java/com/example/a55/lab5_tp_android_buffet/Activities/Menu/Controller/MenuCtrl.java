@@ -16,6 +16,7 @@ import com.example.a55.lab5_tp_android_buffet.Activities.Menu.View.MenuView;
 
 import com.example.a55.lab5_tp_android_buffet.Activities.MiPedido.MiPedidoActivity;
 import com.example.a55.lab5_tp_android_buffet.POJOS.Pedido;
+import com.example.a55.lab5_tp_android_buffet.POJOS.Usuario;
 import com.example.a55.lab5_tp_android_buffet.R;
 
 /**
@@ -44,6 +45,8 @@ public class MenuCtrl implements IMenu{
 
         // Levanta SharedPreferences
         this.shar = PreferenceManager.getDefaultSharedPreferences(this.menuView.menuActivity);
+
+        Toast.makeText(this.menuView.menuActivity, Usuario.usuarioActual.mail, Toast.LENGTH_SHORT).show();
 
     }
 

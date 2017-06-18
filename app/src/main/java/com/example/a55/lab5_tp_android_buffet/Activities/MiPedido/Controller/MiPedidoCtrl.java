@@ -67,7 +67,7 @@ public class MiPedidoCtrl implements IMiPedido {
         }
         else {
             this.limpiarPedido();
-            Toast.makeText(this.miPedidoView.miPedidoActivity, R.string.pedidoVacio, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.miPedidoView.miPedidoActivity, R.string.pedidoEnviado, Toast.LENGTH_SHORT).show();
         }
 
     }

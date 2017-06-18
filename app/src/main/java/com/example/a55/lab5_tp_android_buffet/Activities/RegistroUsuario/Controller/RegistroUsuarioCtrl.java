@@ -1,27 +1,41 @@
 package com.example.a55.lab5_tp_android_buffet.Activities.RegistroUsuario.Controller;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.a55.lab5_tp_android_buffet.Activities.Login.Interfaces.Ilogin;
+import com.example.a55.lab5_tp_android_buffet.Activities.Menu.MenuActivity;
 import com.example.a55.lab5_tp_android_buffet.Activities.RegistroUsuario.Interfaces.IRegistroUsuario;
 import com.example.a55.lab5_tp_android_buffet.Activities.RegistroUsuario.Listeners.RegistroUsuarioListener;
 import com.example.a55.lab5_tp_android_buffet.Activities.RegistroUsuario.View.RegistroUsuarioView;
+import com.example.a55.lab5_tp_android_buffet.Http.JsonParser;
+import com.example.a55.lab5_tp_android_buffet.Http.ThreadConnection;
 import com.example.a55.lab5_tp_android_buffet.POJOS.Usuario;
 import com.example.a55.lab5_tp_android_buffet.R;
 import com.example.a55.lab5_tp_android_buffet.ValidacionesForms.ValidacionesForms;
+
+import org.json.JSONObject;
 
 /**
  * Created by A55 on 14/05/2017.
  */
 
-public class RegistroUsuarioCtrl implements IRegistroUsuario {
+public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
 
     /**
      * Atributos
      */
     RegistroUsuarioView registroUsuarioView;
     RegistroUsuarioListener registroUsuarioListener;
+
+    Handler handler;
+    Usuario usuarioARegistrar;
 
 
     /**
@@ -34,6 +48,9 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario {
         this.registroUsuarioListener = new RegistroUsuarioListener(this);
 
         this.registroUsuarioView.btnRegistrarme.setOnClickListener(registroUsuarioListener);
+
+        // Handler para conexiones
+        this.handler = new Handler(this);
     }
 
     @Override
@@ -97,7 +114,8 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario {
                     break;
                 }
 
-                this.registrar( new Usuario(nombre, apellido, Integer.parseInt(dni), email, clave1) );
+                this.usuarioARegistrar = new Usuario(nombre, apellido, Integer.parseInt(dni), email, clave1);
+                this.validarUsuarioNoExista( this.usuarioARegistrar );
                 break;
 
             default:
@@ -107,21 +125,70 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario {
     }
 
     @Override
+    public void validarUsuarioNoExista(Usuario usuario) {
+        // CODIGO: 101
+        Thread threadValidarUsuarioNoExista = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/" + usuario.mail, "getString", 101));
+        threadValidarUsuarioNoExista.start();
+    }
+
+    @Override
     public void registrar(Usuario usuario) {
 
-        if (Usuario.registrarUsuario(usuario)) {
-            Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, "Usuario Registrado! Ya puede acceder con sus credenciales.", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-            this.registroUsuarioView.registroUsuarioActivity.finish();
+        // CODIGO: 102
+        Uri.Builder params = new Uri.Builder();
+
+        String strBody = "{nombre:"+ "'"+usuario.nombre+"',"+"apellido:"+"'"+usuario.apellido+"',"+"dni:"+usuario.dni+","+"mail:"+"'"+usuario.mail+"',"+"clave:"+"'"+usuario.clave+"'"+"}";
+        Log.d("MI BODY: ", strBody);
+        //JSONObject jsonBody = new JSONObject(strBody.substring(strBody.indexOf("{"), strBody.lastIndexOf("}") + 1));
+        params.appendQueryParameter("body",strBody);
+
+        Thread threadRegistrarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/nuevo", params, "postString", 102));
+        threadRegistrarUsuario.start();
+
+    }
+
+
+
+    @Override
+    public boolean handleMessage(Message msg) {
+        // validarUsuarioNoExista
+        if (msg.arg1 == 2 && msg.arg2 == 101)
+        {
+
+            Boolean rtaValidarUsuarioNoExista =  JsonParser.getValidacionUsuarioNoExista((String)msg.obj);
+
+            if (rtaValidarUsuarioNoExista) {
+
+                //this.registrar(this.usuarioARegistrar);
+                Log.d("NO EXISTE :)", ""+rtaValidarUsuarioNoExista);
+            }
+            else {
+                Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioError), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+
         }
-        else {
-            Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.usuarioExiste), Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+        // registrarUsuario
+        if (msg.arg1 == 2 && msg.arg2 == 102)
+        {
+
+
+            if (msg.obj.equals("Se inserto correctamente")) {
+
+                Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioOk), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                this.registroUsuarioView.registroUsuarioActivity.finish();
+            }
+            else {
+                Toast toast = Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.registroUsuarioError), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+
         }
 
-
-
+        return true;
     }
 }
