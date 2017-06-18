@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         */
 
         // Productos
+        /*
         Producto.listaProductos = new ArrayList<Producto>();
 
         Producto.listaProductos.add( new Producto("Tostado"                      , 22.00) ) ;
@@ -59,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         Producto.listaProductos.add( new Producto("Saladix 25 / 30 Gr. (sobre)"   ,  9.00) ) ;
         Producto.listaProductos.add( new Producto("Toblerone 50 Gr."              , 18.00) ) ;
         Producto.listaProductos.add( new Producto("Cerealitas Pocket 105 Gr."     , 19.00) ) ;
-
+*/
         // Pedido
         Pedido.listaPedidos = new ArrayList<Producto>();
         Pedido.precioTotalPedido= 0.00;

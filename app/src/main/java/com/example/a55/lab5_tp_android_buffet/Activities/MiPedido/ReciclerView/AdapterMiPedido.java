@@ -41,7 +41,7 @@ public class AdapterMiPedido extends RecyclerView.Adapter<ViewHolderMiPedido> {
     public void onBindViewHolder(ViewHolderMiPedido holder, int position) {
         Producto p = this.listaProductosPedidos.get(position);
         holder.miPedidoView = this.miPedidoView;
-        holder.tvDescripcionProducto.setText(p.descripcion);
+        holder.tvDescripcionProducto.setText(p.nombre);
         holder.tvPrecioProductoNumero.setText(p.precio.toString());
 
         //Guarda la posicion en el holder

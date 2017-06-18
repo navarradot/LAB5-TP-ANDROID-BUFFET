@@ -2,7 +2,10 @@ package com.example.a55.lab5_tp_android_buffet.Activities.Menu.Controller;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -15,7 +18,10 @@ import com.example.a55.lab5_tp_android_buffet.Activities.Menu.MenuActivity;
 import com.example.a55.lab5_tp_android_buffet.Activities.Menu.View.MenuView;
 
 import com.example.a55.lab5_tp_android_buffet.Activities.MiPedido.MiPedidoActivity;
+import com.example.a55.lab5_tp_android_buffet.Http.JsonParser;
+import com.example.a55.lab5_tp_android_buffet.Http.ThreadConnection;
 import com.example.a55.lab5_tp_android_buffet.POJOS.Pedido;
+import com.example.a55.lab5_tp_android_buffet.POJOS.Producto;
 import com.example.a55.lab5_tp_android_buffet.POJOS.Usuario;
 import com.example.a55.lab5_tp_android_buffet.R;
 
@@ -23,7 +29,7 @@ import com.example.a55.lab5_tp_android_buffet.R;
  * Created by A55 on 18/05/2017.
  */
 
-public class MenuCtrl implements IMenu{
+public class MenuCtrl implements IMenu {
 
     /**
      * Atributos
@@ -31,7 +37,7 @@ public class MenuCtrl implements IMenu{
     public MenuView menuView;
     public MenuListener menuListener;
 
-    SharedPreferences shar;
+    public SharedPreferences shar;
 
     /**
      * Constructor
@@ -45,8 +51,6 @@ public class MenuCtrl implements IMenu{
 
         // Levanta SharedPreferences
         this.shar = PreferenceManager.getDefaultSharedPreferences(this.menuView.menuActivity);
-
-        Toast.makeText(this.menuView.menuActivity, Usuario.usuarioActual.mail, Toast.LENGTH_SHORT).show();
 
     }
 

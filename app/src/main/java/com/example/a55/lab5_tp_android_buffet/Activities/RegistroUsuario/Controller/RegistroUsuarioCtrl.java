@@ -126,15 +126,14 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
 
     @Override
     public void validarUsuarioNoExista(Usuario usuario) {
-        // CODIGO: 101
-        Thread threadValidarUsuarioNoExista = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/" + usuario.mail, "getString", 101));
+
+        Thread threadValidarUsuarioNoExista = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/" + usuario.mail, "getString"));
         threadValidarUsuarioNoExista.start();
     }
 
     @Override
     public void registrar(Usuario usuario) {
 
-        // CODIGO: 102
         try {
 
             String stringJsonPost = "{"+
@@ -145,7 +144,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
                 "\"clave\":"    + "\"" + usuario.clave    + "\""  + "}";
 
 
-            Thread threadRegistrarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/nuevo", stringJsonPost, "postString", 102));
+            Thread threadRegistrarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/nuevo", stringJsonPost, "postString"));
             threadRegistrarUsuario.start();
         } catch (Exception e) {
             Log.d("ERROR: ", e.getMessage());
@@ -161,7 +160,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
 
         try {
             // validarUsuarioNoExista
-            if (msg.arg1 == 2 && msg.arg2 == 101) {
+            if (msg.arg1 == 2) {
 
                 Boolean rtaValidarUsuarioNoExista = JsonParser.getValidacionUsuarioNoExista((String) msg.obj);
 
@@ -177,7 +176,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
 
             }
             // registrarUsuario
-            if (msg.arg1 == 3 && msg.arg2 == 102) {
+            if (msg.arg1 == 3) {
                 String mensaje = (String) msg.obj;
 
                 if (mensaje.equals("Se inserto correctamente")) {

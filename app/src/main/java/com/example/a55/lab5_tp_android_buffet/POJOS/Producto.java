@@ -9,14 +9,19 @@ import java.util.List;
 
 public class Producto {
 
-    public String descripcion;
+    public String tipoMenu;
+    public String nombre;
     public Double precio;
+    public String imagen;
+    public byte[] imagenBytes;
 
     public static List<Producto> listaProductos;
 
-    public Producto(String descripcion, Double precio) {
-        this.descripcion = descripcion;
-        this.precio = precio;
+    public Producto(String tipoMenu, String nombre, Double precio, String imagen) {
+        this.tipoMenu   = tipoMenu;
+        this.nombre     = nombre;
+        this.precio     = precio;
+        this.imagen     = imagen;
     }
 
 

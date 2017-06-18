@@ -136,8 +136,7 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
         // Guarda el usuarioActual, si no es validado se borra.
         Usuario.usuarioActual = usuario;
 
-        // CODIGO: 100
-        Thread threadValidarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/" + usuario.mail + "/" + usuario.clave, "getString", 100));
+        Thread threadValidarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/" + usuario.mail + "/" + usuario.clave, "getString"));
         threadValidarUsuario.start();
     }
 
@@ -170,8 +169,8 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
     @Override
     public boolean handleMessage(Message msg) {
 
-        if (msg.arg1 == 2 && msg.arg2 == 100)
-        {
+        // validarLogin
+        if (msg.arg1 == 2) {
 
             Boolean rtaLogin =  JsonParser.getValidacionLogin((String)msg.obj);
 
@@ -195,7 +194,6 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
-
         }
 
         return true;

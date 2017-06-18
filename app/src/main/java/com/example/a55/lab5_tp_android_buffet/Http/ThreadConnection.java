@@ -20,26 +20,33 @@ public class ThreadConnection implements Runnable {
 
     private Handler handler;
     private String tipo;
-    private Integer origen;
     private String strUrl;
+    Integer listPosition;
     private String stringJsonPost;
 
 
-    public ThreadConnection (Handler handler, String strUrl, String tipo, Integer origen)
+    public ThreadConnection (Handler handler, String strUrl, String tipo)
     {
         this.handler    = handler;
         this.tipo       = tipo;
-        this.origen     = origen;
+
         this.strUrl     = strUrl;
     }
 
-    public ThreadConnection (Handler handler, String strUrl, String stringJsonPost, String tipo, Integer origen)
+    public ThreadConnection (Handler handler, String strUrl, String stringJsonPost, String tipo)
     {
         this.handler    = handler;
         this.tipo       = tipo;
-        this.origen     = origen;
         this.strUrl     = strUrl;
         this.stringJsonPost   = stringJsonPost;
+    }
+
+    public ThreadConnection (Handler handler, String strUrl, Integer listPosition, String tipo)
+    {
+        this.handler        = handler;
+        this.tipo           = tipo;
+        this.listPosition   = listPosition;
+        this.strUrl         = strUrl;
     }
 
 
@@ -56,21 +63,19 @@ public class ThreadConnection implements Runnable {
                 if (this.tipo.equals("getImagen"))
                 {
                     message.arg1 = 1;
-                    message.arg2 = this.origen;
+                    message.arg2 = this.listPosition;
                     message.obj = httpManager.getBytesDataByGET();
                 }
 
                 if (this.tipo.equals("getString"))
                 {
                     message.arg1 = 2;
-                    message.arg2 = this.origen;
                     message.obj = httpManager.getStrDataByGET();
                 }
 
                 if (this.tipo.equals("postString"))
                 {
                     message.arg1 = 3;
-                    message.arg2 = this.origen;
                     message.obj = httpManager.getStrDataByPOST(this.stringJsonPost);
                 }
             }

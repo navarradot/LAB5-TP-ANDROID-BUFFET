@@ -16,42 +16,6 @@ import java.util.List;
 
 public class JsonParser {
 
-    /*
-    public static List<Producto> getProductos(String str) {
-
-        List<Producto> listaProductos = new ArrayList<Producto>();
-        //Log.d("arraycito: ", str);
-        try {
-            String productosArray = "{ productos: ";
-            productosArray = productosArray.concat(str+"}");
-
-            JSONObject jsonObject = new JSONObject(productosArray);
-
-            JSONArray productos = jsonObject.getJSONArray("productos");
-
-            for (int i = 0; i < productos.length(); i++) {
-                JSONObject producto = productos.getJSONObject(i);
-
-                String tipoMenu = producto.getString("tipoMenu");
-                String nombre = producto.getString("nombre");
-                Double precio = producto.getDouble("precio");
-                String imagen = (producto.getString("imagen"));
-                //String imagen = "http";
-
-                Producto prod = new Producto(tipoMenu, nombre, precio, imagen);
-                listaProductos.add(prod);
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("ERRRRROOR: ", e.getMessage().toString());
-        }
-
-        return listaProductos;
-
-    }
-    */
-
     public static Boolean getValidacionLogin(String str) {
 
         Boolean rta = false;
@@ -72,8 +36,6 @@ public class JsonParser {
             Log.d("ERROR: ", e.getMessage().toString());
         }
         return rta;
-
-
     }
 
     public static Boolean getValidacionUsuarioNoExista(String str) {
@@ -124,4 +86,37 @@ public class JsonParser {
 
     }
     */
+
+    public static List<Producto> getProductos(String str) {
+
+        List<Producto> listaProductos = new ArrayList<Producto>();
+        //Log.d("arraycito: ", str);
+        try {
+            String productosArray = "{ productos: ";
+            productosArray = productosArray.concat(str+"}");
+
+            JSONObject jsonObject = new JSONObject(productosArray);
+
+            JSONArray productos = jsonObject.getJSONArray("productos");
+
+            for (int i = 0; i < productos.length(); i++) {
+                JSONObject producto = productos.getJSONObject(i);
+
+                String tipoMenu = producto.getString("tipoMenu");
+                String nombre = producto.getString("nombre");
+                Double precio = producto.getDouble("precio");
+                String imagen = (producto.getString("imagen"));
+
+                Producto prod = new Producto(tipoMenu, nombre, precio, imagen);
+                listaProductos.add(prod);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("ERRRRROOR: ", e.getMessage().toString());
+        }
+
+        return listaProductos;
+    }
+
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a55.lab5_tp_android_buffet.Activities.Menu.Interfaces.IItemMenu;
@@ -25,7 +26,8 @@ import org.w3c.dom.Text;
 
 public class ViewHolderMenu extends RecyclerView.ViewHolder implements IItemMenu {
 
-    public TextView tvDescripcionProducto;
+    public ImageView ivProducto;
+    public TextView tvNombreProducto;
     public TextView tvPrecioProductoNumero;
     public Button   btnAgregarProductoAPedido;
 
@@ -42,7 +44,8 @@ public class ViewHolderMenu extends RecyclerView.ViewHolder implements IItemMenu
 
 
         //De esta manera solamente voy a hacer tantos findViewById como objetos cree y no cada vez que lo llame. Asi se llaman una sola vez y no siempre.
-        this.tvDescripcionProducto      = (TextView) itemView.findViewById(R.id.tvDescripcionProducto);
+        this.ivProducto                 = (ImageView)itemView.findViewById(R.id.ivProducto);
+        this.tvNombreProducto           = (TextView) itemView.findViewById(R.id.tvNombreProducto);
         this.tvPrecioProductoNumero     = (TextView) itemView.findViewById(R.id.tvPrecioProductoNumero);
         this.btnAgregarProductoAPedido  = (Button)   itemView.findViewById(R.id.btnAgregarProductoAPedido);
 
