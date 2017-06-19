@@ -22,7 +22,7 @@ public class JsonParser {
         try {
 
             JSONObject jsonObject = new JSONObject(str.substring(str.indexOf("{"), str.lastIndexOf("}") + 1));
-            Log.d("A VERRR: ", jsonObject.toString());
+            //Log.d("A VERRR: ", jsonObject.toString());
 
             if(jsonObject.getInt("codigo") == 200) {
                 rta = true;

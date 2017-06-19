@@ -170,7 +170,7 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
     public boolean handleMessage(Message msg) {
 
         // validarLogin
-        if (msg.arg1 == 2) {
+        if (msg.arg1 == 3) {
 
             Boolean rtaLogin =  JsonParser.getValidacionLogin((String)msg.obj);
 

@@ -4,12 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a55.lab5_tp_android_buffet.Activities.Menu.View.MenuView;
@@ -24,34 +26,58 @@ import java.util.List;
  * Created by A55 on 18/05/2017.
  */
 
-public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> {
+public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements Handler.Callback {
 
     private MenuView menuView;
+    public Handler handler;
 
     public AdapterMenu(MenuView menuView)
     {
-        //this.listaProductos  = lista;
         this.menuView = menuView;
+
+        // Handler para conexiones
+        this.handler = new Handler(this);
     }
 
     @Override
     public ViewHolderMenu onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_menu, parent, false);
         ViewHolderMenu myViewHolder = new ViewHolderMenu(v);
-        //Log.d("ATENCION: ", "ENTRO AL onCreateViewHolder() " + create++);
+        /*
+        for (int i = 0; i < Producto.listaProductos.size(); i++){
+            Producto p = Producto.listaProductos.get(i);
+
+            try {
+                // Descarga imagen de cada producto
+                Thread threadDescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, i, "getImagenLista"));
+                threadDescargarImagenProducto.start();
+                threadDescargarImagenProducto.join();
+            } catch (Exception e) {
+                Log.d("Error: descarga imagen", "" + e.getMessage());
+            }
+        }*/
         return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolderMenu holder, int position) {
-        Producto p = Producto.listaProductos.get(position);
+
         holder.menuView = this.menuView;
 
-        // Descarga imagen de producto
-        //Thread threadDescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, position, "getImagen"));
-        //threadDescargarImagenProducto.start();
+        Producto p = Producto.listaProductos.get(position);
 
-        //holder.ivProducto.setImageResource(this.listaProductos.get(position).imagen.getImagen());
+        if (p.imagenBytes != null) {
+
+            // Carga la imagen desde la lista (ya descargada) al ImageView del itemView
+            try {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(p.imagenBytes, 0, p.imagenBytes.length);
+                holder.ivProducto.setImageBitmap(bitmap);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                Log.d("EOnBindViewH", "" + e.getMessage());
+            }
+        }
 
         holder.tvNombreProducto.setText(p.nombre);
         holder.tvPrecioProductoNumero.setText(p.precio.toString());
@@ -65,6 +91,27 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> {
     public int getItemCount() {
         //Log.d("ATENCION: ", "ENTRO AL getItemCount() "+ count++);
         return Producto.listaProductos.size();
+    }
+
+    @Override
+    public boolean handleMessage(Message msg) {
+
+        try {
+
+            // descargarImagenProducto
+            if (msg.arg1 == 2) {
+
+                byte[] imagenBytes = (byte[]) msg.obj;
+
+                // Guarda la imagenBytes en el producto de la lista para  reutilizaro en la pantalla de mi pedido
+                Producto.listaProductos.get(msg.arg2).imagenBytes = imagenBytes;
+            }
+
+        } catch(Exception e) {
+            Log.d("ERROR CATCH", e.getMessage());
+        }
+
+        return true;
     }
 
 

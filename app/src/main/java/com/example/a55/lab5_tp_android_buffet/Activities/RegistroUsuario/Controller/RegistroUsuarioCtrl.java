@@ -160,7 +160,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
 
         try {
             // validarUsuarioNoExista
-            if (msg.arg1 == 2) {
+            if (msg.arg1 == 3) {
 
                 Boolean rtaValidarUsuarioNoExista = JsonParser.getValidacionUsuarioNoExista((String) msg.obj);
 
@@ -176,7 +176,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
 
             }
             // registrarUsuario
-            if (msg.arg1 == 3) {
+            if (msg.arg1 == 4) {
                 String mensaje = (String) msg.obj;
 
                 if (mensaje.equals("Se inserto correctamente")) {

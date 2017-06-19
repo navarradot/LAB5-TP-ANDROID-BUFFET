@@ -67,15 +67,22 @@ public class ThreadConnection implements Runnable {
                     message.obj = httpManager.getBytesDataByGET();
                 }
 
-                if (this.tipo.equals("getString"))
+                if (this.tipo.equals("getImagenLista"))
                 {
                     message.arg1 = 2;
+                    message.arg2 = this.listPosition;
+                    message.obj = httpManager.getBytesDataByGET();
+                }
+
+                if (this.tipo.equals("getString"))
+                {
+                    message.arg1 = 3;
                     message.obj = httpManager.getStrDataByGET();
                 }
 
                 if (this.tipo.equals("postString"))
                 {
-                    message.arg1 = 3;
+                    message.arg1 = 4;
                     message.obj = httpManager.getStrDataByPOST(this.stringJsonPost);
                 }
             }
