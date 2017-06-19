@@ -127,7 +127,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
     @Override
     public void validarUsuarioNoExista(Usuario usuario) {
 
-        Thread threadValidarUsuarioNoExista = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/" + usuario.mail, "getString"));
+        Thread threadValidarUsuarioNoExista = new Thread(new ThreadConnection(handler, "usuarios/" + usuario.mail, "getString"));
         threadValidarUsuarioNoExista.start();
     }
 
@@ -144,7 +144,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
                 "\"clave\":"    + "\"" + usuario.clave    + "\""  + "}";
 
 
-            Thread threadRegistrarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/nuevo", stringJsonPost, "postString"));
+            Thread threadRegistrarUsuario = new Thread(new ThreadConnection(handler, "usuarios/nuevo", stringJsonPost, "postString"));
             threadRegistrarUsuario.start();
         } catch (Exception e) {
             Log.d("ERROR: ", e.getMessage());

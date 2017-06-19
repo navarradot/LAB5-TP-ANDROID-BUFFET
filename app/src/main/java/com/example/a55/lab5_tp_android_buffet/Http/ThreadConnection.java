@@ -24,15 +24,15 @@ public class ThreadConnection implements Runnable {
     Integer listPosition;
     private String stringJsonPost;
 
-
+    //Para getString
     public ThreadConnection (Handler handler, String strUrl, String tipo)
     {
         this.handler    = handler;
         this.tipo       = tipo;
-
         this.strUrl     = strUrl;
     }
 
+    //Para post
     public ThreadConnection (Handler handler, String strUrl, String stringJsonPost, String tipo)
     {
         this.handler    = handler;
@@ -41,6 +41,7 @@ public class ThreadConnection implements Runnable {
         this.stringJsonPost   = stringJsonPost;
     }
 
+    //Para getImagen
     public ThreadConnection (Handler handler, String strUrl, Integer listPosition, String tipo)
     {
         this.handler        = handler;

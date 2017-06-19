@@ -136,7 +136,7 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
         // Guarda el usuarioActual, si no es validado se borra.
         Usuario.usuarioActual = usuario;
 
-        Thread threadValidarUsuario = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/usuarios/" + usuario.mail + "/" + usuario.clave, "getString"));
+        Thread threadValidarUsuario = new Thread(new ThreadConnection(handler, "usuarios/" + usuario.mail + "/" + usuario.clave, "getString"));
         threadValidarUsuario.start();
     }
 

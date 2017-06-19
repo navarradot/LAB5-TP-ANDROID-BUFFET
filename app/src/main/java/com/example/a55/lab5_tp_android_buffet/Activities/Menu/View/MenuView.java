@@ -68,7 +68,7 @@ public class MenuView implements Handler.Callback {
     public void traerProductos() {
         // Trae todos los productos
         try {
-            Thread threadTraerTodosLosProductos = new Thread(new ThreadConnection(handler, "http://192.168.0.2:3000/productos/", "getString"));
+            Thread threadTraerTodosLosProductos = new Thread(new ThreadConnection(handler, "productos/", "getString"));
             threadTraerTodosLosProductos.start();
             threadTraerTodosLosProductos.join();
         } catch (Exception e) {

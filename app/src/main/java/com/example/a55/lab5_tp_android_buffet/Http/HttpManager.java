@@ -25,6 +25,11 @@ public class HttpManager {
 
     public HttpManager(String url) {
 
+        // Valida que la ruta no sea de una imagen: Ejemplo: http://google.com/imagen.jpg
+        if (!url.contains("http")) {
+            url = "http://192.168.0.2:3000/" + url;
+        }
+
         conn = crearHttpUrlConn(url);
     }
 
