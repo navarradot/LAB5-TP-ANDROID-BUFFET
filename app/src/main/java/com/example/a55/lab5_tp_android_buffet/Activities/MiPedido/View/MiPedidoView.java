@@ -1,6 +1,7 @@
 package com.example.a55.lab5_tp_android_buffet.Activities.MiPedido.View;
 
 import android.app.Activity;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
@@ -28,7 +29,7 @@ public class MiPedidoView {
     public Activity miPedidoActivity;
 
     public RecyclerView recyclerListaProductosPedidos;
-    public Button btnConfirmarPedido;
+    public FloatingActionButton fabConfirmarPedido;
     public TextView tvImporteTotalNumero;
     public TextView tvCantidadElementosNumero;
 
@@ -40,7 +41,7 @@ public class MiPedidoView {
         this.miPedidoActivity = miPedidoActivity;
         this.miPedidoModel = miPedidoModel;
 
-        this.btnConfirmarPedido = (Button)miPedidoActivity.findViewById(R.id.btnConfirmarPedido);
+        this.fabConfirmarPedido = (FloatingActionButton) miPedidoActivity.findViewById(R.id.fabConfirmarPedido);
         //this.btnDesloguearse = (Button)menuActivity.findViewById(R.id.btnDesloguearse);
         this.tvImporteTotalNumero = (TextView) miPedidoActivity.findViewById(R.id.tvImporteTotalNumero);
         this.tvImporteTotalNumero.setText(Pedido.precioTotalPedido.toString());

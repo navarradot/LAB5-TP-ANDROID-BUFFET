@@ -47,7 +47,7 @@ public class MiPedidoCtrl implements IMiPedido, Handler.Callback {
         this.miPedidoView = miPedidoView;
         this.miPedidoListener = new MiPedidoListener(this);
 
-        this.miPedidoView.btnConfirmarPedido.setOnClickListener(miPedidoListener);
+        this.miPedidoView.fabConfirmarPedido.setOnClickListener(miPedidoListener);
 
         // Levanta SharedPreferences
         this.shar = PreferenceManager.getDefaultSharedPreferences(this.miPedidoView.miPedidoActivity);
@@ -62,7 +62,7 @@ public class MiPedidoCtrl implements IMiPedido, Handler.Callback {
 
         switch (v.getId()) {
 
-            case R.id.btnConfirmarPedido:
+            case R.id.fabConfirmarPedido:
 
                 this.confirmarPedido();
                 break;

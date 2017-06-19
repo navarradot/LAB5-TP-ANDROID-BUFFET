@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,7 +34,7 @@ public class MenuView implements Handler.Callback {
     public Activity menuActivity;
 
     public RecyclerView recyclerListaProductos;
-    public Button btnVerPedido;
+    public FloatingActionButton fabVerPedido;
     public TextView tvImporteTotalNumero;
     public TextView tvCantidadElementosNumero;
 
@@ -49,7 +50,7 @@ public class MenuView implements Handler.Callback {
         this.menuActivity = menuActivity;
         this.menuModel = menuModel;
 
-        this.btnVerPedido = (Button)menuActivity.findViewById(R.id.btnVerPedido);
+        this.fabVerPedido = (FloatingActionButton) menuActivity.findViewById(R.id.fabVerPedido);
         this.tvImporteTotalNumero = (TextView) menuActivity.findViewById(R.id.tvImporteTotalNumero);
         this.tvImporteTotalNumero.setText(Pedido.precioTotalPedido.toString());
         this.tvCantidadElementosNumero = (TextView) menuActivity.findViewById(R.id.tvCantidadElementosNumero);

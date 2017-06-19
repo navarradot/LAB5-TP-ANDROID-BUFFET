@@ -229,7 +229,7 @@
                 android:padding="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:background="@color/colorPrimaryDark"
+                android:background="@android:color/holo_red_light"
                 android:textColor="#fff"
                 android:textSize="12dp"/>
 

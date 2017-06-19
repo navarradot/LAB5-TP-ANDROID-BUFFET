@@ -47,7 +47,7 @@ public class MenuCtrl implements IMenu {
         this.menuView = menuView;
         this.menuListener = new MenuListener(this);
 
-        this.menuView.btnVerPedido.setOnClickListener(menuListener);
+        this.menuView.fabVerPedido.setOnClickListener(menuListener);
 
         // Levanta SharedPreferences
         this.shar = PreferenceManager.getDefaultSharedPreferences(this.menuView.menuActivity);
@@ -67,7 +67,7 @@ public class MenuCtrl implements IMenu {
 
         switch (v.getId()) {
 
-            case R.id.btnVerPedido:
+            case R.id.fabVerPedido:
 
                 this.verPedido();
                 break;

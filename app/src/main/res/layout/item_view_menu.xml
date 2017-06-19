@@ -61,11 +61,11 @@
         <Button
             android:id="@+id/btnAgregarProductoAPedido"
             android:name="btnAgregarItem"
-            android:text="+"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="right"
             android:background="@android:color/holo_green_light"
+            android:drawableBottom="@mipmap/ic_add_shopping_cart_white_24dp"
             android:gravity="center"
             android:padding="6dp"
             android:textColor="#fff"
