@@ -54,6 +54,11 @@ public class ThreadConnection implements Runnable {
     @Override
     public void run() {
 
+        //mira si la variable del hilo actual esta en true
+        if ( Thread.currentThread().isInterrupted() ) {
+            return;
+        }
+
         try {
 
             Message message = new Message();

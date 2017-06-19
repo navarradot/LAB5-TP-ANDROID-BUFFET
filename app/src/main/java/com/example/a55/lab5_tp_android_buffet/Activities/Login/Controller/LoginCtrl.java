@@ -18,10 +18,13 @@ import com.example.a55.lab5_tp_android_buffet.Activities.Menu.MenuActivity;
 import com.example.a55.lab5_tp_android_buffet.Activities.RegistroUsuario.RegistroUsuarioActivity;
 import com.example.a55.lab5_tp_android_buffet.Http.JsonParser;
 import com.example.a55.lab5_tp_android_buffet.Http.ThreadConnection;
+import com.example.a55.lab5_tp_android_buffet.POJOS.Pedido;
+import com.example.a55.lab5_tp_android_buffet.POJOS.Producto;
 import com.example.a55.lab5_tp_android_buffet.POJOS.Usuario;
 import com.example.a55.lab5_tp_android_buffet.R;
 import com.example.a55.lab5_tp_android_buffet.ValidacionesForms.ValidacionesForms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,13 +74,6 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
             editor.commit();
         }
 
-        // Levanta SharedPreferences (reemplazado por inicio automatico - mas abajo)
-        /*
-        this.shar = PreferenceManager.getDefaultSharedPreferences(this.loginView.loginActivity);
-        this.loginView.chkRecordarme.setChecked( this.shar.getBoolean("recordarme", false) );
-        this.loginView.etEmail.setText( this.shar.getString("email", "") );
-        this.loginView.etClave.setText( this.shar.getString("clave", "") );
-        */
         this.shar = PreferenceManager.getDefaultSharedPreferences(this.loginView.loginActivity);
         Boolean recordarme = this.shar.getBoolean("recordarme", false);
         String mail = this.shar.getString("email", "");
@@ -88,6 +84,10 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
             this.loginView.loginActivity.startActivity(intent);
         }
 
+        // Instancia atributos estaticos de Pedido.
+        Pedido.listaPedidos = new ArrayList<Producto>();
+        Pedido.precioTotalPedido   = 0.00;
+        Pedido.cantidadItemsPedido = 0;
 
     }
 
@@ -99,7 +99,7 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
 
         switch (v.getId()) {
 
-            case R.id.btnIngresar:
+            case R.id.fabIngresar:
 
                 //Validaciones Form
                 if(!ValidacionesForms.validarInputVacio(email)) {
