@@ -1,6 +1,9 @@
 package com.example.a55.lab5_tp_android_buffet.Activities.MiPedido.ReciclerView;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +42,21 @@ public class AdapterMiPedido extends RecyclerView.Adapter<ViewHolderMiPedido> {
 
     @Override
     public void onBindViewHolder(ViewHolderMiPedido holder, int position) {
-        Producto p = this.listaProductosPedidos.get(position);
+
         holder.miPedidoView = this.miPedidoView;
-        holder.tvDescripcionProducto.setText(p.nombre);
+
+        Producto p = this.listaProductosPedidos.get(position);
+
+        // Carga la imagen desde la lista (ya descargada) al ImageView del itemView
+        try {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(p.imagenBytes, 0, p.imagenBytes.length);
+            holder.ivProducto.setImageBitmap(bitmap);
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Log.d("EOnBindViewH", "" + e.getMessage());
+        }
+        holder.tvNombreProducto.setText(p.nombre);
         holder.tvPrecioProductoNumero.setText(p.precio.toString());
 
         //Guarda la posicion en el holder

@@ -88,7 +88,6 @@ public class MenuView implements Handler.Callback {
                 threaddescargarImagenProducto.join(2000);
             }
 
-
         } catch (Exception e) {
             Log.d("ERROR CATCH", e.getMessage());
         }
@@ -104,7 +103,6 @@ public class MenuView implements Handler.Callback {
 
                 // Descarga imagenes de productos
                 this.descargarImagenesProductos();
-
             }
 
             // descargarImagenProducto

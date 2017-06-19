@@ -43,19 +43,7 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
     public ViewHolderMenu onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_menu, parent, false);
         ViewHolderMenu myViewHolder = new ViewHolderMenu(v);
-        /*
-        for (int i = 0; i < Producto.listaProductos.size(); i++){
-            Producto p = Producto.listaProductos.get(i);
 
-            try {
-                // Descarga imagen de cada producto
-                Thread threadDescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, i, "getImagenLista"));
-                threadDescargarImagenProducto.start();
-                threadDescargarImagenProducto.join();
-            } catch (Exception e) {
-                Log.d("Error: descarga imagen", "" + e.getMessage());
-            }
-        }*/
         return myViewHolder;
     }
 

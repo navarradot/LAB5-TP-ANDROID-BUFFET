@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a55.lab5_tp_android_buffet.Activities.Menu.Interfaces.IItemMenu;
@@ -22,7 +23,8 @@ import com.example.a55.lab5_tp_android_buffet.R;
 
 public class ViewHolderMiPedido extends RecyclerView.ViewHolder implements IItemMiPedido {
 
-    public TextView tvDescripcionProducto;
+    public ImageView ivProducto;
+    public TextView tvNombreProducto;
     public TextView tvPrecioProductoNumero;
     public Button btnQuitarProductoPedido;
 
@@ -38,9 +40,10 @@ public class ViewHolderMiPedido extends RecyclerView.ViewHolder implements IItem
 
 
         //De esta manera solamente voy a hacer tantos findViewById como objetos cree y no cada vez que lo llame. Asi se llaman una sola vez y no siempre.
-        this.tvDescripcionProducto      = (TextView) itemView.findViewById(R.id.tvDescripcionProducto);
+        this.ivProducto                 = (ImageView)itemView.findViewById(R.id.ivProducto);
+        this.tvNombreProducto           = (TextView) itemView.findViewById(R.id.tvNombreProducto);
         this.tvPrecioProductoNumero     = (TextView) itemView.findViewById(R.id.tvPrecioProductoNumero);
-        this.btnQuitarProductoPedido  = (Button)   itemView.findViewById(R.id.btnQuitarProductoPedido);
+        this.btnQuitarProductoPedido    = (Button)   itemView.findViewById(R.id.btnQuitarProductoPedido);
 
         this.posicion = 0;
 
@@ -61,10 +64,6 @@ public class ViewHolderMiPedido extends RecyclerView.ViewHolder implements IItem
         ( (TextView)this.miPedidoView.miPedidoActivity.findViewById(R.id.tvCantidadElementosNumero) ).setText(Pedido.cantidadItemsPedido.toString());
 
         this.miPedidoView.recyclerListaProductosPedidos.getAdapter().notifyItemRemoved(posicion);
-
-
-
-
 
     }
 }
