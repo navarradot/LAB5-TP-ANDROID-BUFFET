@@ -7,6 +7,7 @@
     <string name="pedidoEnviado">Su pedido fue enviado con éxito!</string>
     <string name="pedidoVacio">NO SE PUEDE ENVIAR UN PEDIDO VACIO :(</string>
     <string name="problemaConexion">Problema al conectar con el servidor. Intentelo nuevamente.</string>
+    <string name="problemaEnvioPedido">Problema al enviar pedido. Intentelo nuevamente.</string>
 
     <!-- Validaciones-->
     <string name="campoVacio">Campo vacío!</string>

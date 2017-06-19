@@ -7,6 +7,7 @@
     <string name="pedidoEnviado">Your order was sent successfully!</string>
     <string name="pedidoVacio">YOU CAN NOT SUBMIT AN EMPTY ORDER :(</string>
     <string name="problemaConexion">Problem connecting to the server. Try again.</string>
+    <string name="problemaEnvioPedido">Problem sending order. Try again.</string>
 
     <!-- Validaciones-->
     <string name="campoVacio">Empty field!</string>

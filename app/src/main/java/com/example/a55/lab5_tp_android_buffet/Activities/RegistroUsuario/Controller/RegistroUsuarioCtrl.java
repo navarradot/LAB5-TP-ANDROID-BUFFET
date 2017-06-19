@@ -31,11 +31,11 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
     /**
      * Atributos
      */
-    RegistroUsuarioView registroUsuarioView;
-    RegistroUsuarioListener registroUsuarioListener;
+    public RegistroUsuarioView registroUsuarioView;
+    public RegistroUsuarioListener registroUsuarioListener;
 
-    Handler handler;
-    Usuario usuarioARegistrar;
+    public Handler handler;
+    public Usuario usuarioARegistrar;
 
 
     /**
@@ -149,10 +149,7 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
         } catch (Exception e) {
             Log.d("ERROR: ", e.getMessage());
         }
-
-
     }
-
 
 
     @Override
