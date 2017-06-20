@@ -86,7 +86,7 @@ public class MenuView implements Handler.Callback {
 
                 Thread threaddescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, i,  "getImagenLista"));
                 threaddescargarImagenProducto.start();
-                threaddescargarImagenProducto.join(2000);
+                threaddescargarImagenProducto.join(3000);
             }
 
         } catch (Exception e) {

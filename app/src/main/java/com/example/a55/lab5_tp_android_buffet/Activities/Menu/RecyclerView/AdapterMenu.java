@@ -30,9 +30,11 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
 
     private MenuView menuView;
     public Handler handler;
+    private int OnCreateCont;
 
     public AdapterMenu(MenuView menuView)
     {
+        this.OnCreateCont = 0;
         this.menuView = menuView;
 
         // Handler para conexiones
@@ -43,7 +45,23 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
     public ViewHolderMenu onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_menu, parent, false);
         ViewHolderMenu myViewHolder = new ViewHolderMenu(v);
+        /*
+        Producto p = Producto.listaProductos.get(this.OnCreateCont);
 
+        if (p.imagenBytes != null) {
+
+            // Carga la imagen desde la lista (ya descargada) al ImageView del itemView
+            try {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(p.imagenBytes, 0, p.imagenBytes.length);
+                myViewHolder.ivProducto.setImageBitmap(bitmap);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                Log.d("EOnBindViewH", "" + e.getMessage());
+            }
+        }
+        this.OnCreateCont++;
+        */
         return myViewHolder;
     }
 

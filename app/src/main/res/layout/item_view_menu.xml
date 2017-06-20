@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/ivProducto"
         android:layout_width="60dp"
-        android:layout_height="60dp" />
-        <!--android:src="@mipmap/utnfra" />-->
+        android:layout_height="60dp"
+        android:src="@mipmap/utnfra" />
 
     <LinearLayout
         android:layout_width="wrap_content"
