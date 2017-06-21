@@ -31,8 +31,8 @@ public class MiPedidoActivity extends AppCompatActivity {
 
         //MVC
         miPedidoModel = new MiPedidoModel();
-        miPedidoView = new MiPedidoView(this, miPedidoModel);
-        miPedidoCtrl = new MiPedidoCtrl(miPedidoView);
+        miPedidoView  = new MiPedidoView(this, miPedidoModel);
+        miPedidoCtrl  = new MiPedidoCtrl(miPedidoView);
     }
 
 

@@ -41,7 +41,7 @@ public class ThreadConnection implements Runnable {
         this.stringJsonPost   = stringJsonPost;
     }
 
-    //Para getImagen
+    //Para getImagenLista
     public ThreadConnection (Handler handler, String strUrl, Integer listPosition, String tipo)
     {
         this.handler        = handler;

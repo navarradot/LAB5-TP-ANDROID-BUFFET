@@ -13,16 +13,18 @@ public class Producto {
     public String nombre;
     public Double precio;
     public String imagen;
+
     public byte[] imagenBytes;
 
     public static List<Producto> listaProductos;
 
+    public Producto(){}
+
     public Producto(String tipoMenu, String nombre, Double precio, String imagen) {
-        this.tipoMenu   = tipoMenu;
-        this.nombre     = nombre;
-        this.precio     = precio;
-        this.imagen     = imagen;
+        this.tipoMenu    = tipoMenu;
+        this.nombre      = nombre;
+        this.precio      = precio;
+        this.imagen      = imagen;
+        this.imagenBytes = null;
     }
-
-
 }

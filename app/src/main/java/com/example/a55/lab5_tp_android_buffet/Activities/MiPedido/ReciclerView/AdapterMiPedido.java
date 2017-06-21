@@ -2,18 +2,26 @@ package com.example.a55.lab5_tp_android_buffet.Activities.MiPedido.ReciclerView;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a55.lab5_tp_android_buffet.Activities.Menu.RecyclerView.AdapterMenu;
 import com.example.a55.lab5_tp_android_buffet.Activities.Menu.RecyclerView.ViewHolderMenu;
 import com.example.a55.lab5_tp_android_buffet.Activities.Menu.View.MenuView;
 import com.example.a55.lab5_tp_android_buffet.Activities.MiPedido.View.MiPedidoView;
+import com.example.a55.lab5_tp_android_buffet.Http.JsonParser;
+import com.example.a55.lab5_tp_android_buffet.Http.ThreadConnection;
+import com.example.a55.lab5_tp_android_buffet.POJOS.Pedido;
 import com.example.a55.lab5_tp_android_buffet.POJOS.Producto;
 import com.example.a55.lab5_tp_android_buffet.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,21 +30,17 @@ import java.util.List;
 
 public class AdapterMiPedido extends RecyclerView.Adapter<ViewHolderMiPedido> {
 
-    private List<Producto> listaProductosPedidos;
     private MiPedidoView miPedidoView;
 
-    public AdapterMiPedido(List<Producto> lista, MiPedidoView miPedidoView)
+    public AdapterMiPedido(MiPedidoView miPedidoView)
     {
-        this.listaProductosPedidos  = lista;
         this.miPedidoView = miPedidoView;
-
     }
 
     @Override
     public ViewHolderMiPedido onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_mi_pedido, parent, false);
         ViewHolderMiPedido myViewHolder = new ViewHolderMiPedido(v);
-        //Log.d("ATENCION: ", "ENTRO AL onCreateViewHolder() " + create++);
         return myViewHolder;
     }
 
@@ -45,7 +49,8 @@ public class AdapterMiPedido extends RecyclerView.Adapter<ViewHolderMiPedido> {
 
         holder.miPedidoView = this.miPedidoView;
 
-        Producto p = this.listaProductosPedidos.get(position);
+        // Trae el productoPedido de la lista de pedidos en la posicion en la que esta el holder
+        Producto p = Pedido.listaPedidos.get(position);
 
         // Carga la imagen desde la lista (ya descargada) al ImageView del itemView
         try {
@@ -61,12 +66,11 @@ public class AdapterMiPedido extends RecyclerView.Adapter<ViewHolderMiPedido> {
 
         //Guarda la posicion en el holder
         holder.posicion = position;
-        //Log.d("ATENCION: ", "ENTRO AL onBindViewHolder( )"+ bind++);
     }
 
     @Override
     public int getItemCount() {
         //Log.d("ATENCION: ", "ENTRO AL getItemCount() "+ count++);
-        return this.listaProductosPedidos.size();
+        return Pedido.obtenerCantidadItemsPedido();
     }
 }

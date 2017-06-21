@@ -20,6 +20,7 @@ import com.example.a55.lab5_tp_android_buffet.Http.ThreadConnection;
 import com.example.a55.lab5_tp_android_buffet.POJOS.Producto;
 import com.example.a55.lab5_tp_android_buffet.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,12 +31,16 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
 
     private MenuView menuView;
     public Handler handler;
-    private int OnCreateCont;
+    private int onCreateCont;
+    public List<ViewHolderMenu> listaHoldersMenu;
 
     public AdapterMenu(MenuView menuView)
     {
-        this.OnCreateCont = 0;
+        this.onCreateCont = 0;
         this.menuView = menuView;
+
+        // Lista donde guardo los holders que se crean en el onCreate, para una vez descargados (en el handlerMessage) "re-bindear el holder
+        this.listaHoldersMenu = new ArrayList<>();
 
         // Handler para conexiones
         this.handler = new Handler(this);
@@ -45,23 +50,11 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
     public ViewHolderMenu onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_menu, parent, false);
         ViewHolderMenu myViewHolder = new ViewHolderMenu(v);
-        /*
-        Producto p = Producto.listaProductos.get(this.OnCreateCont);
 
-        if (p.imagenBytes != null) {
+        this.descargarImagen(onCreateCont);
+        this.listaHoldersMenu.add(myViewHolder);
+        this.onCreateCont++;
 
-            // Carga la imagen desde la lista (ya descargada) al ImageView del itemView
-            try {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(p.imagenBytes, 0, p.imagenBytes.length);
-                myViewHolder.ivProducto.setImageBitmap(bitmap);
-            } catch (Exception e) {
-
-                e.printStackTrace();
-                Log.d("EOnBindViewH", "" + e.getMessage());
-            }
-        }
-        this.OnCreateCont++;
-        */
         return myViewHolder;
     }
 
@@ -72,9 +65,10 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
 
         Producto p = Producto.listaProductos.get(position);
 
-        if (p.imagenBytes != null) {
+        holder.tvNombreProducto.setText(p.nombre);
+        holder.tvPrecioProductoNumero.setText(p.precio.toString());
 
-            // Carga la imagen desde la lista (ya descargada) al ImageView del itemView
+            // Bindea la imagen del producto (imagenBytes) con el respectivo ImageView del RecivlerView
             try {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(p.imagenBytes, 0, p.imagenBytes.length);
                 holder.ivProducto.setImageBitmap(bitmap);
@@ -83,19 +77,13 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
                 e.printStackTrace();
                 Log.d("EOnBindViewH", "" + e.getMessage());
             }
-        }
-
-        holder.tvNombreProducto.setText(p.nombre);
-        holder.tvPrecioProductoNumero.setText(p.precio.toString());
 
         //Guarda la posicion en el holder
         holder.posicion = position;
-        //Log.d("ATENCION: ", "ENTRO AL onBindViewHolder( )"+ bind++);
     }
 
     @Override
     public int getItemCount() {
-        //Log.d("ATENCION: ", "ENTRO AL getItemCount() "+ count++);
         return Producto.listaProductos.size();
     }
 
@@ -111,14 +99,20 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
 
                 // Guarda la imagenBytes en el producto de la lista para  reutilizaro en la pantalla de mi pedido
                 Producto.listaProductos.get(msg.arg2).imagenBytes = imagenBytes;
+                this.bindViewHolder(this.listaHoldersMenu.get(msg.arg2), msg.arg2);
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.d("ERROR CATCH", e.getMessage());
         }
-
         return true;
     }
 
+    private void descargarImagen(int posicion) {
+        Producto p = Producto.listaProductos.get(posicion);
 
+        Thread threadDescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, posicion,  "getImagenLista"));
+        threadDescargarImagenProducto.start();
+        //threadDescargarImagenProducto.join(3000);
+    }
 }

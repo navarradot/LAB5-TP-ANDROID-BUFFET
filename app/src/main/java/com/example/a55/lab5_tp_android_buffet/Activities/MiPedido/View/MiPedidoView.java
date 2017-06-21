@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -56,7 +57,7 @@ public class MiPedidoView {
 
         this.recyclerListaProductosPedidos.setLayoutManager(layoutManager);
 
-        AdapterMiPedido adapter = new AdapterMiPedido(Pedido.listaPedidos, this);
+        AdapterMiPedido adapter = new AdapterMiPedido(this);
         this.recyclerListaProductosPedidos.setAdapter(adapter);
     }
 }

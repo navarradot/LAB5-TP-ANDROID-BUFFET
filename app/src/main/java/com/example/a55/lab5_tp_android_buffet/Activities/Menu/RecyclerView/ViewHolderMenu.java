@@ -42,7 +42,6 @@ public class ViewHolderMenu extends RecyclerView.ViewHolder implements IItemMenu
 
         super(itemView);
 
-
         //De esta manera solamente voy a hacer tantos findViewById como objetos cree y no cada vez que lo llame. Asi se llaman una sola vez y no siempre.
         this.ivProducto                 = (ImageView)itemView.findViewById(R.id.ivProducto);
         this.tvNombreProducto           = (TextView) itemView.findViewById(R.id.tvNombreProducto);
@@ -50,10 +49,8 @@ public class ViewHolderMenu extends RecyclerView.ViewHolder implements IItemMenu
         this.btnAgregarProductoAPedido  = (Button)   itemView.findViewById(R.id.btnAgregarProductoAPedido);
 
         this.posicion = 0;
-        this.parent = parent;
 
         this.listener = new ListenerItemViewMenu(this);
-        //itemView.setOnClickListener(listener);
         this.btnAgregarProductoAPedido.setOnClickListener(listener);
     }
 
@@ -62,12 +59,11 @@ public class ViewHolderMenu extends RecyclerView.ViewHolder implements IItemMenu
     public void agregarProductoAPedido(View v) {
 
         //Log.d("POSICION DE ELEMENTO: ", "" + this.posicion);
-
-        Pedido.agregarProductoAPedido(Producto.listaProductos.get(posicion));
+        Producto p = Producto.listaProductos.get(posicion);
+        Pedido.agregarProductoAPedido(p);
 
         ( (TextView)this.menuView.menuActivity.findViewById(R.id.tvImporteTotalNumero) ).setText(Pedido.precioTotalPedido.toString());
         ( (TextView)this.menuView.menuActivity.findViewById(R.id.tvCantidadElementosNumero) ).setText(Pedido.cantidadItemsPedido.toString());
-
 
     }
 }

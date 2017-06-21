@@ -40,7 +40,6 @@ public class MenuView implements Handler.Callback {
 
     public Handler handler;
 
-    private Integer contDescargaImagenProducto;
 
     /**
      * Contructor
@@ -62,8 +61,6 @@ public class MenuView implements Handler.Callback {
         // Trae lista de productos de la apiRest
         this.traerProductos();
 
-        this.contDescargaImagenProducto = 0;
-
     }
 
     public void traerProductos() {
@@ -77,23 +74,6 @@ public class MenuView implements Handler.Callback {
         }
     }
 
-    public void descargarImagenesProductos() {
-
-        // Descarga todas las imagenes de los productos
-        try {
-            for (int i=0; i< Producto.listaProductos.size(); i++) {
-                Producto p = Producto.listaProductos.get(i);
-
-                Thread threaddescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, i,  "getImagenLista"));
-                threaddescargarImagenProducto.start();
-                threaddescargarImagenProducto.join(3000);
-            }
-
-        } catch (Exception e) {
-            Log.d("ERROR CATCH", e.getMessage());
-        }
-    }
-
     @Override
     public boolean handleMessage(Message msg) {
 
@@ -102,38 +82,21 @@ public class MenuView implements Handler.Callback {
             if (msg.arg1 == 3) {
                 Producto.listaProductos = JsonParser.getProductos((String) msg.obj);
 
-                // Descarga imagenes de productos
-                this.descargarImagenesProductos();
-            }
+                // RecyclerView
+                this.recyclerListaProductos = (RecyclerView)menuActivity.findViewById(R.id.RecyclerListaProductos);
 
-            // descargarImagenProducto
-            if (msg.arg1 == 2) {
+                //Le decimos como presenta la informacion, puede ser grilla, columnas etc.
+                LinearLayoutManager layoutManager = new LinearLayoutManager(menuActivity);
 
-                if (this.contDescargaImagenProducto < Producto.listaProductos.size()-1) {
-                    byte[] imagenBytes = (byte[]) msg.obj;
+                this.recyclerListaProductos.setLayoutManager(layoutManager);
 
-                    // Guarda la imagenBytes en el producto de la lista para  reutilizaro en la pantalla de mi pedido
-                    Producto.listaProductos.get(msg.arg2).imagenBytes = imagenBytes;
-                    this.contDescargaImagenProducto++;
-                }
-                else {
-                    // RecyclerView
-                    this.recyclerListaProductos = (RecyclerView)menuActivity.findViewById(R.id.RecyclerListaProductos);
-
-                    //Le decimos como presenta la informacion, puede ser grilla, columnas etc.
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(menuActivity);
-
-                    this.recyclerListaProductos.setLayoutManager(layoutManager);
-
-                    AdapterMenu adapter = new AdapterMenu(this);
-                    this.recyclerListaProductos.setAdapter(adapter);
-                }
+                AdapterMenu adapter = new AdapterMenu(this);
+                this.recyclerListaProductos.setAdapter(adapter);
             }
 
         } catch(Exception e) {
             Log.d("ERROR CATCH", e.getMessage());
         }
-
         return true;
     }
 }
