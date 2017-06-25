@@ -24,7 +24,7 @@ import com.example.a55.lab5_tp_android_buffet.R;
  * Created by A55 on 18/05/2017.
  */
 
-public class MenuView implements Handler.Callback {
+public class MenuView {
 
     /**
      * Atributos
@@ -37,8 +37,6 @@ public class MenuView implements Handler.Callback {
     public FloatingActionButton fabVerPedido;
     public TextView tvImporteTotalNumero;
     public TextView tvCantidadElementosNumero;
-
-    public Handler handler;
 
 
     /**
@@ -55,49 +53,16 @@ public class MenuView implements Handler.Callback {
         this.tvCantidadElementosNumero = (TextView) menuActivity.findViewById(R.id.tvCantidadElementosNumero);
         this.tvCantidadElementosNumero.setText(Pedido.cantidadItemsPedido.toString());
 
-        // Handler para conexiones
-        this.handler = new Handler(this);
+        // RecyclerView
+        this.recyclerListaProductos = (RecyclerView)menuActivity.findViewById(R.id.RecyclerListaProductos);
 
-        // Trae lista de productos de la apiRest
-        this.traerProductos();
+        //Le decimos como presenta la informacion, puede ser grilla, columnas etc.
+        LinearLayoutManager layoutManager = new LinearLayoutManager(menuActivity);
 
-    }
+        this.recyclerListaProductos.setLayoutManager(layoutManager);
 
-    public void traerProductos() {
-        // Trae todos los productos
-        try {
-            Thread threadTraerTodosLosProductos = new Thread(new ThreadConnection(handler, "productos/", "getString"));
-            threadTraerTodosLosProductos.start();
-            threadTraerTodosLosProductos.join();
-        } catch (Exception e) {
-            Log.d("ERROR CATCH", e.getMessage());
-        }
-    }
-
-    @Override
-    public boolean handleMessage(Message msg) {
-
-        try {
-            // traerTodosLosProductos
-            if (msg.arg1 == 3) {
-                Producto.listaProductos = JsonParser.getProductos((String) msg.obj);
-
-                // RecyclerView
-                this.recyclerListaProductos = (RecyclerView)menuActivity.findViewById(R.id.RecyclerListaProductos);
-
-                //Le decimos como presenta la informacion, puede ser grilla, columnas etc.
-                LinearLayoutManager layoutManager = new LinearLayoutManager(menuActivity);
-
-                this.recyclerListaProductos.setLayoutManager(layoutManager);
-
-                AdapterMenu adapter = new AdapterMenu(this);
-                this.recyclerListaProductos.setAdapter(adapter);
-            }
-
-        } catch(Exception e) {
-            Log.d("ERROR CATCH", e.getMessage());
-        }
-        return true;
+        AdapterMenu adapter = new AdapterMenu(this);
+        this.recyclerListaProductos.setAdapter(adapter);
     }
 }
 

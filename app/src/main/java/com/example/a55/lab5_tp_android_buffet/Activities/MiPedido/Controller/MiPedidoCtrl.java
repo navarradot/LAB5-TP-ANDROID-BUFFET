@@ -166,7 +166,7 @@ public class MiPedidoCtrl implements IMiPedido, Handler.Callback {
                 else {
 
                     this.limpiarPedido();
-                    Toast.makeText(this.miPedidoView.miPedidoActivity, R.string.pedidoEnviado, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.miPedidoView.miPedidoActivity, R.string.problemaEnvioPedido, Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -52,17 +52,30 @@ public class AdapterMiPedido extends RecyclerView.Adapter<ViewHolderMiPedido> {
         // Trae el productoPedido de la lista de pedidos en la posicion en la que esta el holder
         Producto p = Pedido.listaPedidos.get(position);
 
-        // Carga la imagen desde la lista (ya descargada) al ImageView del itemView
-        try {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(p.imagenBytes, 0, p.imagenBytes.length);
-            holder.ivProducto.setImageBitmap(bitmap);
-        } catch (Exception e) {
-
-            e.printStackTrace();
-            Log.d("EOnBindViewH", "" + e.getMessage());
-        }
         holder.tvNombreProducto.setText(p.nombre);
         holder.tvPrecioProductoNumero.setText(p.precio.toString());
+
+        if (p.imagenBytes == null) {
+
+            //this.descargarImagen(position);
+
+            try {
+                holder.ivProducto.setImageResource(R.mipmap.utnfra);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("EOnBindViewH", "" + e.getMessage());
+            }
+        }
+        else {
+            // Bindea la imagen del producto (imagenBytes) con el respectivo ImageView del RecivlerView
+            try {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(p.imagenBytes, 0, p.imagenBytes.length);
+                holder.ivProducto.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("EOnBindViewH", "" + e.getMessage());
+            }
+        }
 
         //Guarda la posicion en el holder
         holder.posicion = position;

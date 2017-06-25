@@ -62,31 +62,6 @@ public class JsonParser {
         return rta;
     }
 
-    /*
-    public static Boolean getRegistroUsuario(String str) {
-
-        Boolean rta = false;
-        try {
-
-            JSONObject jsonObject = new JSONObject(str.substring(str.indexOf("{"), str.lastIndexOf("}") + 1));
-
-
-            JSONArray jsonArray = jsonObject.getJSONArray("");
-
-            if (jsonArray.length() < 0) {
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("ERROR: ", e.getMessage().toString());
-        }
-        return rta;
-
-
-    }
-    */
-
     public static List<Producto> getProductos(String str) {
 
         List<Producto> listaProductos = new ArrayList<Producto>();
