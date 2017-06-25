@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -42,12 +43,21 @@ public class MenuCtrl implements IMenu {
     /**
      * Constructor
      */
-    public MenuCtrl(MenuView menuView) {
+    public MenuCtrl(final MenuView menuView) {
 
         this.menuView = menuView;
         this.menuListener = new MenuListener(this);
 
         this.menuView.fabVerPedido.setOnClickListener(menuListener);
+
+        this.menuView.swipeRecyclerListaProductos.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                menuView.adapter.traerProductos();
+                menuView.swipeRecyclerListaProductos.setRefreshing(false);
+
+            }
+        });
 
         // Levanta SharedPreferences
         this.shar = PreferenceManager.getDefaultSharedPreferences(this.menuView.menuActivity);

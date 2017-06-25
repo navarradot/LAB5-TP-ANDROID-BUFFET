@@ -102,7 +102,7 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
         return Producto.listaProductos.size();
     }
 
-    private void traerProductos() {
+    public void traerProductos() {
         // Trae todos los productos
         try {
             Thread threadTraerTodosLosProductos = new Thread(new ThreadConnection(handler, "productos/", "getString"));
@@ -113,7 +113,7 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
         }
     }
 
-    private void descargarImagen(int position) {
+    public void descargarImagen(int position) {
         Producto p = Producto.listaProductos.get(position);
 
         Thread threadDescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, position,  "getImagenLista"));

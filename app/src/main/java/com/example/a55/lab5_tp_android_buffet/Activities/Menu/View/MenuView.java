@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,6 +35,8 @@ public class MenuView {
     public Activity menuActivity;
 
     public RecyclerView recyclerListaProductos;
+    public AdapterMenu adapter;
+    public SwipeRefreshLayout swipeRecyclerListaProductos;
     public FloatingActionButton fabVerPedido;
     public TextView tvImporteTotalNumero;
     public TextView tvCantidadElementosNumero;
@@ -56,12 +59,15 @@ public class MenuView {
         // RecyclerView
         this.recyclerListaProductos = (RecyclerView)menuActivity.findViewById(R.id.RecyclerListaProductos);
 
+        // SwipeRefreshLayout
+        this.swipeRecyclerListaProductos = (SwipeRefreshLayout)menuActivity.findViewById(R.id.swipeRecyclerListaProductos);
+
         //Le decimos como presenta la informacion, puede ser grilla, columnas etc.
         LinearLayoutManager layoutManager = new LinearLayoutManager(menuActivity);
 
         this.recyclerListaProductos.setLayoutManager(layoutManager);
 
-        AdapterMenu adapter = new AdapterMenu(this);
+        this.adapter = new AdapterMenu(this);
         this.recyclerListaProductos.setAdapter(adapter);
     }
 }
