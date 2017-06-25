@@ -170,6 +170,10 @@ public class MiPedidoCtrl implements IMiPedido, Handler.Callback {
                 }
 
             }
+            //Error de conexión httpManager -> ThreadConnection
+            if (msg.arg1 == 1000) {
+                Toast.makeText(this.miPedidoView.miPedidoActivity, this.miPedidoView.miPedidoActivity.getResources().getString(R.string.problemaConexion), Toast.LENGTH_LONG).show();
+            }
         } catch(Exception e) {
             Log.d("ERROR CATCH", e.getMessage());
         }

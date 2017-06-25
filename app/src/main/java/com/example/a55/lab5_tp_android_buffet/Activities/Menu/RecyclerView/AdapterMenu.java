@@ -140,6 +140,10 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
                 Producto.listaProductos.get(msg.arg2).imagenBytes = imagenBytes;
                 this.notifyItemChanged(msg.arg2);
             }
+            //Error de conexión httpManager -> ThreadConnection
+            if (msg.arg1 == 1000) {
+                Toast.makeText(this.menuView.menuActivity, this.menuView.menuActivity.getResources().getString(R.string.problemaConexion), Toast.LENGTH_LONG).show();
+            }
 
         } catch (Exception e) {
             Log.d("ERROR CATCH", e.getMessage());

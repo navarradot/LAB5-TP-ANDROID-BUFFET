@@ -170,7 +170,6 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-
             }
             // registrarUsuario
             if (msg.arg1 == 4) {
@@ -188,6 +187,10 @@ public class RegistroUsuarioCtrl implements IRegistroUsuario, Handler.Callback {
                     toast.show();
                 }
 
+            }
+            //Error de conexión httpManager -> ThreadConnection
+            if (msg.arg1 == 1000) {
+                Toast.makeText(this.registroUsuarioView.registroUsuarioActivity, this.registroUsuarioView.registroUsuarioActivity.getResources().getString(R.string.problemaConexion), Toast.LENGTH_LONG).show();
             }
         } catch(Exception e) {
             Log.d("ERROR CATCH", e.getMessage());

@@ -21,24 +21,24 @@ public class ThreadConnection implements Runnable {
     private Handler handler;
     private String tipo;
     private String strUrl;
-    Integer listPosition;
+    private Integer listPosition;
     private String stringJsonPost;
 
     //Para getString
     public ThreadConnection (Handler handler, String strUrl, String tipo)
     {
-        this.handler    = handler;
-        this.tipo       = tipo;
-        this.strUrl     = strUrl;
+        this.handler        = handler;
+        this.tipo           = tipo;
+        this.strUrl         = strUrl;
     }
 
     //Para post
     public ThreadConnection (Handler handler, String strUrl, String stringJsonPost, String tipo)
     {
-        this.handler    = handler;
-        this.tipo       = tipo;
-        this.strUrl     = strUrl;
-        this.stringJsonPost   = stringJsonPost;
+        this.handler        = handler;
+        this.tipo           = tipo;
+        this.strUrl         = strUrl;
+        this.stringJsonPost = stringJsonPost;
     }
 
     //Para getImagenLista
@@ -59,9 +59,11 @@ public class ThreadConnection implements Runnable {
             return;
         }
 
+        Message message = new Message();
+
         try {
 
-            Message message = new Message();
+
             HttpManager httpManager = new HttpManager(this.strUrl);
 
             if (httpManager.isReady()) {
@@ -95,10 +97,12 @@ public class ThreadConnection implements Runnable {
 
             this.handler.sendMessage(message);
 
-        } catch (Exception e)
+        } catch (Exception e) // captura problema de conexion
         {
-            Log.d("PROBLEMA CONEXION: ", "" + e.getMessage());
-            e.printStackTrace();
+            //Log.d("PROBLEMA CONEXION: ", "" + e.getMessage());
+            //e.printStackTrace();
+            message.arg1 = 1000;
+            this.handler.sendMessage(message);
         }
     }
 }

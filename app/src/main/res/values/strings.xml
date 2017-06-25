@@ -6,7 +6,7 @@
     <string name="registroUsuarioError">ERROR: Ya existe un usuario con ese email o DNI.</string>
     <string name="pedidoEnviado">Su pedido fue enviado con éxito!</string>
     <string name="pedidoVacio">NO SE PUEDE ENVIAR UN PEDIDO VACIO :(</string>
-    <string name="problemaConexion">Problema al conectar con el servidor. Intentelo nuevamente.</string>
+    <string name="problemaConexion">Problema al conectar con el servidor. Chequee su conexión y vuelva a intentarlo.</string>
     <string name="problemaEnvioPedido">Problema al enviar pedido. Intentelo nuevamente.</string>
 
     <!-- Validaciones-->

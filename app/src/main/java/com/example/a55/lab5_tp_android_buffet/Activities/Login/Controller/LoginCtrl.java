@@ -136,7 +136,7 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
         // Guarda el usuarioActual, si no es validado se borra.
         Usuario.usuarioActual = usuario;
 
-        Thread threadValidarUsuario = new Thread(new ThreadConnection(handler, "usuarios/" + usuario.mail + "/" + usuario.clave, "getString"));
+        Thread threadValidarUsuario = new Thread(new ThreadConnection(this.handler, "usuarios/" + usuario.mail + "/" + usuario.clave, "getString"));
         threadValidarUsuario.start();
     }
 
@@ -187,13 +187,17 @@ public class LoginCtrl implements Ilogin, Handler.Callback {
                 this.loginView.loginActivity.startActivity(intent);
             }
             else {
-                // Borra el usuarioActual guardado antes de validar.ç
+                // Borra el usuarioActual guardado antes de validar.
                 Usuario.usuarioActual = null;
 
                 Toast toast = Toast.makeText(this.loginView.loginActivity, this.loginView.loginActivity.getResources().getString(R.string.emailClaveIncorrecto), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
+        }
+        //Error de conexión httpManager -> ThreadConnection
+        if (msg.arg1 == 1000) {
+            Toast.makeText(this.loginView.loginActivity, this.loginView.loginActivity.getResources().getString(R.string.problemaConexion), Toast.LENGTH_LONG).show();
         }
 
         return true;
