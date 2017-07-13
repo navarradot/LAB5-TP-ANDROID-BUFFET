@@ -22,6 +22,8 @@ import com.example.a55.lab5_tp_android_buffet.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by A55 on 18/05/2017.
@@ -31,6 +33,7 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
 
     private MenuView menuView;
     public Handler handler;
+    public ExecutorService executorService;
 
     public int onCreateCont;
 
@@ -44,6 +47,9 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
         Producto.listaProductos = new ArrayList<Producto>();
         // Trae lista de productos de la apiRest
         this.traerProductos();
+
+        // Pool de Thread
+        this.executorService = Executors.newFixedThreadPool(1);
 
         onCreateCont=0;
     }
@@ -117,7 +123,9 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
         Producto p = Producto.listaProductos.get(position);
 
         Thread threadDescargarImagenProducto = new Thread(new ThreadConnection(handler, p.imagen, position,  "getImagenLista"));
-        threadDescargarImagenProducto.start();
+        //threadDescargarImagenProducto.start();
+        // Agrega Thread a Pool
+        this.executorService.execute(threadDescargarImagenProducto);
     }
 
     @Override
@@ -139,6 +147,7 @@ public class AdapterMenu extends RecyclerView.Adapter<ViewHolderMenu> implements
                 // Guarda la imagenBytes en el producto de la lista para  reutilizaro en la pantalla de mi pedido
                 Producto.listaProductos.get(msg.arg2).imagenBytes = imagenBytes;
                 this.notifyItemChanged(msg.arg2);
+                //this.notifyDataSetChanged();
             }
             //Error de conexión httpManager -> ThreadConnection
             if (msg.arg1 == 1000) {
